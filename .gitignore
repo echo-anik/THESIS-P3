@@ -1,0 +1,44 @@
+# Ignore processed data and large generated files
+# Ignore processed data files (keep raw copies locally)
+/processed_data/*
+# Keep raw files if present locally (they will still be ignored by git)
+!/processed_data/wadi_train_raw.csv
+!/processed_data/wadi_test_raw.csv
+
+# Ignore all CSV files (we'll keep them locally but not in git)
+*.csv
+
+# Ignore large raw combined HAI files (we'll keep only results)
+/combined_HAI_*.csv
+
+# Ignore model checkpoints and heavy results caches
+/Results/checkpoints/
+
+# Keep WADI raw folder (do not ignore)
+# (WADI.A2_19 Nov 2019) - kept intentionally
+
+# Python ignores
+__pycache__/
+*.pyc
+*.pkl
+*.sqlite
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+env/
+
+# Ignore any dataset folders except the raw WADI folder
+/data/
+/datasets/
+
+# Keep notebooks? ignore outputs
+.ipynb_checkpoints/
