@@ -1,0 +1,37 @@
+% chapters/chapter_1.tex
+
+\section{Background}
+\label{sec:ch1_background}
+The proliferation of internet-connected devices, accelerated by global shifts in connectivity, has introduced unprecedented challenges for network security \cite{rahman2024}. This is particularly acute in the domain of Industrial Control Systems (ICS), which form the operational backbone of critical infrastructure \cite{benkhelifa2018}. Historically, these systems were physically isolated ("air-gapped") and relied on proprietary, obscure protocols, a state often described as "security by obscurity" \cite{hossain2023}. However, the modern industrial paradigm, driven by the need for efficiency and data-driven insights, has led to a deep convergence of Information Technology (IT) and Operational Technology (OT) \cite{benkhelifa2018}. This has transformed these once-isolated systems into complex Industrial Internet of Things (IIoT) ecosystems, where physical machinery is monitored and controlled via standard network protocols like TCP/IP and connected to corporate networks and the internet \cite{alruwaili2021}.
+
+\section{Rational of the Study or Motivation}
+\label{sec:ch1_motivation}
+While this integration unlocks immense operational advantages, it also exposes physical processes to a vast landscape of cyber threats, from denial-of-service attacks to advanced persistent threats (APTs) \cite{lee2024, salmakayala2024}. An attack on an ICS can have devastating physical consequences, underscoring the urgent need for advanced security solutions \cite{benkhelifa2018}. Traditional Intrusion Detection Systems (IDS), which rely on signature-based detection of known threats, are often insufficient against novel and zero-day attacks \cite{jiang2020}. Anomaly-based detection using machine learning offers a more adaptive approach, but as noted by numerous studies, these systems often struggle with high false positive rates and the computational overhead of complex models \cite{cao2022, wang2023}. This research is motivated by the need to bridge this gap by identifying machine learning models that are not only highly accurate but also robust and practical for deployment in real-world industrial environments \cite{mouli2023}.
+
+\section{Problem Statement}
+\label{sec:ch1_problem_statement}
+Despite the theoretical advantages of ML-based intrusion detection, several fundamental challenges persist \cite{benkhelifa2018,altunay2023}. The primary problem is achieving a high detection rate for malicious attacks (high recall) without generating an unmanageable number of false alarms (high precision), which can lead to "alert fatigue" among security operators \cite{cao2022}. This overarching problem is exacerbated by three critical issues:
+\begin{itemize}
+    \item \textbf{High False Positive Rates and Alert Fatigue:} Many advanced systems still struggle with false alarm rates that make them impractical for real-world deployment \cite{al-daweri2021, wang2023}. As noted by Cao et al. \cite{cao2022}, this is a persistent challenge that can render an otherwise accurate IDS operationally useless. When operators are constantly inundated with false alarms, they begin to distrust the system, potentially ignoring a real attack when it occurs.
+    \item \textbf{Computational Overhead and Real-Time Constraints:} The complexity of deep learning models often compromises the real-time detection capabilities required in high-speed industrial networks where latency can be critical \cite{altunay2023, seong2022}. An IDS that cannot process data and generate an alert faster than the process it is monitoring is fundamentally flawed. This creates a difficult trade-off between model complexity and detection speed \cite{kim2023, mohy-eddine2023}. Deep learning, compared to machine learning, requires considerable parameters and dataset sizes, significantly increasing training cost \cite{Altunay2023}.
+    \item \textbf{Handling Diverse and Unknown Attack Types:} Industrial systems face a wide spectrum of threats, from simple denial-of-service to sophisticated, stealthy attacks that manipulate physical processes over long periods \cite{lee2024, salmakayala2024}. Developing a single, unified model that can effectively detect the full spectrum of cyber threats, including both known and unknown attacks, remains a significant challenge \cite{benkhelifa2018, rahman2024}.
+\end{itemize}
+
+\section{Objective}
+\label{sec:ch1_objective}
+This study aims to address these problems through the following objectives:
+\begin{itemize}
+    \item To conduct a comprehensive performance benchmark of eight distinct machine learning and deep learning models on representative ICS/IIoT datasets, with a primary focus on HAI 22.04 \cite{shin2020, shin2021}.
+    \item To replicate and validate state-of-the-art (SOTA) results reported in existing literature, particularly those using tree-based ensemble models \cite{hossain2023, mohy-eddine2023}.
+    \item To establish a clear performance hierarchy by analyzing both SOTA models and traditional baselines across multiple datasets.
+    \item To investigate the effectiveness and inherent challenges of applying standard Recurrent Neural Network (RNN) architectures to this task \cite{seong2022, jiang2020}.
+    \item To provide a detailed analysis of the results, offering practical insights into the suitability of different models for securing real-world industrial systems.
+\end{itemize}
+
+\section{Methodology in Brief}
+\label{sec:ch1_methodology_brief}
+This study employs a quantitative, experimental research approach. The methodology involves a systematic benchmark of eight machine learning models on the HAI 22.04 dataset. The process includes extensive data preprocessing, temporal feature engineering to capture system dynamics, and stratified data splitting to handle class imbalance. Models are trained on a GPU-accelerated platform and evaluated using standard classification metrics, including F1-Score, Precision, and Recall, with a focus on minimizing false negatives.
+
+\section{Scopes and Challenges}
+\label{sec:ch1_scopes_challenges}
+The scope of this research is focused on supervised learning techniques for anomaly-based intrusion detection in IIoT environments. The primary dataset used is HAI 22.04, with SWaT and WADI datasets used for cross-validation. The research does not cover signature-based detection, network-level prevention mechanisms, or unsupervised learning models in depth. The main challenges encountered include handling the severe class imbalance present in the datasets, the computational cost associated with training deep learning models, and ensuring the reproducibility of results reported in existing literature due to variations in experimental setup.

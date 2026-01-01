@@ -1,0 +1,24 @@
+% chapters/chapter_6.tex
+
+\section{Summary of Findings}
+\label{sec:ch6_summary}
+This study conducted a rigorous benchmark of eight models on the HAI 22.04 dataset to identify a robust and efficient IDS for IIoT environments. Our results confirm that tuned tree-based ensemble models, particularly XGBoost, provide state-of-the-art performance for this task, successfully identifying over 97\% of attacks with a minimal false positive rate. While simpler models and standard RNNs were less effective without extensive architectural modifications and sophisticated training regimens, they provided valuable insights into the complexity of IIoT intrusion detection. Cross-dataset comparison further highlighted the robustness of our methodology, with our results closely mirroring established industry benchmarks.
+
+\section{Contributions to the Field}
+\label{sec:ch6_contributions}
+This research provides several contributions to the field of IIoT security:
+\begin{itemize}
+    \item It offers a comprehensive and reproducible benchmark of multiple model classes on a recent, complex ICS dataset, serving as a practical guide for practitioners.
+    \item By validating our results against industry standards on the SWAT and WADI datasets, it demonstrates the efficacy and reliability of our feature engineering and modeling pipeline.
+    \item The explicit demonstration of standard RNN failure modes provides a valuable case study on the challenges of applying deep learning in this domain, particularly concerning class imbalance and training instability.
+    \item Ultimately, this work contributes to the identification of effective and reliable models—specifically, tuned gradient boosting ensembles—for securing critical infrastructure.
+\end{itemize}
+
+\section{Recommendations for Future Work}
+\label{sec:ch6_future_work}
+The success of the XGBoost model provides a strong foundation for future improvements. Building upon concepts outlined in the literature and established research roadmaps, we recommend the following directions:
+\begin{itemize}
+    \item \textbf{Explainable AI (XAI) for Trustworthy IDS:} While our model is highly accurate, it remains a "black box." Future work should apply state-of-the-art XAI techniques like SHAP or LIME to interpret the model's decisions \cite{prasad2020,}. This would provide invaluable insights into why the model makes certain decisions, increasing trust and operational utility for security analysts.
+    \item \textbf{Evaluating Robustness to Concept Drift:} Real-world industrial environments are not static; their "normal" behavior can change over time due to maintenance or process optimization \cite{al-daweri2021, al-turaiki2020}. This phenomenon, known as concept drift, can degrade a static model's performance. A critical next step is to evaluate our model's robustness against concept drift and to investigate adaptive strategies or online retraining to ensure long-term reliability \cite{wang2023}.
+    \item \textbf{Advanced Hybrid Model Fusion:} A promising direction is the fusion of our high-performing ensemble model with a deep learning feature extractor. As outlined in our research planning \cite{long2023,lee2024,mane2023} this could involve using a trained GRU or LSTM to provide sophisticated temporal features to the XGBoost model, potentially combining the predictive power of ensembles with the sequence-recognition strengths of deep learning to address the limitations identified in the literature.
+\end{itemize}

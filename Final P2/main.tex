@@ -1,0 +1,99 @@
+\documentclass[12pt, a4paper, oneside]{report}
+
+% ===== REQUIRED PACKAGES =====
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes} % For proper quotation marks
+\usepackage[margin=1in]{geometry} % Sets page margins
+\usepackage{graphicx} % For including graphics
+\usepackage{float} % For better control over float placement (e.g., [H])
+\usepackage{caption} % For customizing captions
+\usepackage{subcaption} % For subfigures
+\usepackage{longtable} % For tables that can span multiple pages
+\usepackage{booktabs} % For professional-looking table rules (toprule, midrule, bottomrule)
+\usepackage{tabularx} % For tables with adjustable column widths
+\usepackage{multirow} % For cells spanning multiple rows in tables
+\usepackage{setspace} % For line spacing (e.g., \onehalfspacing)
+\usepackage{enumitem} % For customizing lists (e.g., itemize, enumerate)
+\usepackage{url} % For handling URLs
+\usepackage{microtype} % For improved text kerning and spacing
+\usepackage[colorlinks=true, allcolors=blue]{hyperref} % For clickable links in PDF
+
+% ----- Bibliography (Numbered Style) -----
+% Configures biblatex for Biber backend, IEEE style, numeric citations, and no sorting
+\usepackage[backend=biber, style=ieee, citestyle=numeric, sorting=none]{biblatex}
+\addbibresource{bibliography/references.bib} % Path to your bibliography file
+
+% ----- Automatic Table of Contents Entries -----
+% Prevents listing TOC, LOT, LOF within themselves.
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+% ===== CUSTOM COMMANDS AND FIXES =====
+% Sets the correct relative path for your images folder
+\graphicspath{{images/}}
+
+% Defines the page numbering commands for the thesis structure
+\newcommand{\frontmatter}{%
+  \cleardoublepage
+  \pagenumbering{roman}}
+\newcommand{\mainmatter}{%
+  \cleardoublepage
+  \pagenumbering{arabic}}
+\newcommand{\backmatter}{%
+  \cleardoublepage}
+
+% ===== DOCUMENT START =====
+\begin{document}
+
+\onehalfspacing % Sets line spacing to 1.5 lines
+
+% --- FRONT MATTER ---
+\frontmatter % Starts Roman numeral page numbering
+
+\input{core/titlepage.tex}
+\input{core/declaration.tex}
+\input{core/approval.tex}
+% \input{core/ethics_statement.tex} % Uncomment if you add content to this file
+% \input{core/dedication.tex} % Uncomment if you add content to this file
+\input{core/acknowledgement.tex}
+\input{core/abstract.tex}
+
+\cleardoublepage % Ensures TOC starts on a new page
+\tableofcontents
+\cleardoublepage % Ensures List of Figures starts on a new page
+\listoffigures
+\cleardoublepage % Ensures List of Tables starts on a new page
+\listoftables
+\cleardoublepage % Ensures Nomenclature starts on a new page
+
+\input{core/nomenclature.tex} % Nomenclature is typically part of front matter
+
+% --- MAIN MATTER ---
+\mainmatter % Switches to Arabic page numbering and resets chapter counter
+
+\setcounter{chapter}{0} % Sets chapter counter to 0, so the next \chapter command will make it Chapter 1
+\chapter{Introduction}
+\input{chapters/chapter_1.tex}
+
+\chapter{Literature Review}
+\input{chapters/chapter_2.tex}
+
+\chapter{Requirements, Impacts and Constraints}
+\input{chapters/chapter_3.tex}
+
+\chapter{Proposed Methodology}
+\input{chapters/chapter_4.tex}
+
+\chapter{Result Analysis}
+\input{chapters/chapter_5.tex}
+
+\chapter{Conclusion}
+\input{chapters/chapter_6.tex}
+
+% --- BACK MATTER ---
+\backmatter % For appendices and bibliography
+
+\cleardoublepage % Ensures bibliography starts on a new page
+\printbibliography[title={Bibliography}] % Prints the bibliography with the title "Bibliography"
+
+\end{document}

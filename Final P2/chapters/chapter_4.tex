@@ -1,0 +1,43 @@
+% chapters/chapter_4.tex
+
+\section{Design Process or Methodology Overview}
+\label{sec:ch4_overview}
+Our research methodology employs a systematic and reproducible workflow designed for rigorous experimentation on a GPU-accelerated platform. This approach ensures computational efficiency when handling large-scale time-series data. The process begins with data integration and extensive preprocessing, followed by model training and a comprehensive evaluation phase, as illustrated in Figure \ref{fig:workflow}. The core of this methodology is to benchmark a diverse suite of machine learning models to identify an optimal solution for the specific challenges of intrusion detection in IIoT environments.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{images/workflow.png}
+    \caption{Research Methodology Workflow}
+    \label{fig:workflow}
+\end{figure}
+
+\section{Preliminary Design or Design (Model) Specification}
+\label{sec:ch4_model_spec}
+To establish a comprehensive performance benchmark, a diverse suite of eight models was selected. These models were grouped by their architecture to compare different classes of machine learning solutions.
+\begin{itemize}
+    \item \textbf{High-Performance Ensembles:} This group includes state-of-the-art gradient boosting frameworks (XGBoost, LightGBM, and CatBoost) and a standard Random Forest model.
+    \item \textbf{Baseline Models:} To establish a performance baseline, standard classifiers including K-Nearest Neighbors (KNN), a Support Vector Classifier (SVC) with an RBF kernel, and Logistic Regression were chosen.
+    \item \textbf{Recurrent Neural Networks (RNNs):} To capture temporal dependencies in the data, two RNN architectures, Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU), were implemented.
+\end{itemize}
+
+\section{Data Collection (If Applicable)}
+\label{sec:ch4_data_collection}
+The foundation of this supervised learning experiment is the HAI 22.04 dataset \cite{shin2021,}. In the initial handling stage, non-essential columns, such as timestamps, were removed to focus on the sensor and actuator data relevant to attack detection.
+\subsection{Data Cleaning}
+\label{sec:ch4_data_cleaning}
+Following the initial feature engineering process, the dataset contained Not-a-Number (NaN) values. To handle these missing values and ensure data integrity, a forward-fill strategy was first applied, followed by a backward-fill.
+\subsection{Data Transformation}
+\label{sec:ch4_data_transformation}
+To prepare the data for different types of models, two distinct preprocessing paths were taken. For models sensitive to feature scaling (e.g., KNN, SVC, RNNs), the data was transformed using a MinMaxScaler. For tree-based ensembles, the unscaled data was used directly. To improve model generalization, a small amount of Gaussian noise was introduced into the training data as a form of regularization.
+\subsection{Data Integration}
+\label{sec:ch4_data_integration}
+Our methodology is centered on multi-modal data fusion. Our feature engineering process serves as a form of early-stage data integration, where temporal features derived from process data are combined with instantaneous network features to create a richer dataset.
+\subsection{Data Reduction}
+\label{sec:ch4_data_reduction}
+A feature engineering process was applied rather than a feature reduction process. New features were created to capture temporal dynamics, including two lagged features (lag1, lag2) and rolling window statistics (mean and standard deviation). The feature space was augmented, not reduced.
+
+\subsection{Summary of Preprocessed Data}
+\label{sec:ch4_data_summary}
+The final feature-engineered dataset was partitioned into a 70/30 training/testing split using stratified sampling to ensure the minority attack class was maintained in both sets.
+\section{Implementation of Selected Design}
+\label{sec:ch4_implementation}
+The eight models were implemented in Python 3. The high-performance ensembles were trained on unscaled data with GPU support via the NVIDIA RAPIDS suite. The XGBoost model was specifically tuned with a \verb|scale_pos_weight| hyperparameter set to 20 to strongly penalize the misclassification of the minority (attack) class. The RNN architectures (LSTM and GRU) were implemented in PyTorch, using a `WeightedRandomSampler` to address severe class imbalance during training.

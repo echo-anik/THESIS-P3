@@ -1,0 +1,68 @@
+% chapters/chapter_3.tex
+
+\section{Final Specifications and Requirements}
+\label{sec:ch3_specifications}
+This research was conducted using a cloud-based environment with GPU acceleration to handle the large datasets and complex models. The specific requirements for this project are broken down into functional, non-functional, and technical categories.
+\subsection*{Functional Requirements}
+The developed Intrusion Detection System must:
+\begin{itemize}
+    \item Process and analyze network traffic and physical process data from the HAI 22.04 dataset format.
+    \item Classify system states into 'Normal' or 'Attack' based on the engineered features.
+    \item Provide a clear and quantifiable output metric for its detection performance (e.g., F1-Score).
+\end{itemize}
+
+\subsection*{Non-Functional Requirements}
+The system must meet the following performance and reliability criteria:
+\begin{itemize}
+    \item \textbf{Accuracy:} Achieve a high detection rate (Recall) for the minority attack class to minimize missed threats.
+    \item \textbf{Reliability:} Maintain a low False Positive Rate (FPR) to ensure operational trust and avoid the "alert fatigue" common in security operations.
+    \item \textbf{Efficiency:} The model's prediction phase must be computationally efficient to demonstrate viability for future real-time deployment in high-speed industrial networks.
+\end{itemize}
+
+\subsection*{Technical Specifications}
+The project was executed with the following software and libraries:
+\begin{itemize}
+    \item \textbf{Programming Language:} Python 3.
+    \item \textbf{Core Libraries:} Pandas for data manipulation, NumPy for numerical operations, and Scikit-learn for data preprocessing and baseline modeling.
+    \item \textbf{GPU Acceleration:} NVIDIA RAPIDS suite (cuDF, cuML) for handling large-scale data and accelerating model training.
+    \item \textbf{Modeling Libraries:} XGBoost, LightGBM, CatBoost for high-performance ensembles, and PyTorch for implementing Recurrent Neural Network architectures.
+\end{itemize}
+
+\section{Societal Impact}
+\label{sec:ch3_societal_impact}
+The societal impact of this research is significant. An effective IDS for industrial control systems directly enhances the safety and reliability of critical national infrastructure such as power grids, water treatment facilities, and manufacturing plants. By preventing cyber-attacks on these systems, this work contributes to mitigating the risk of large-scale service disruptions, environmental damage, and threats to public safety that could result from a compromised industrial facility. A successful attack on a power grid, for example, could have cascading effects, disrupting hospitals, communication networks, and financial systems, leading to widespread societal and economic chaos.
+
+\section{Environmental Impact}
+\label{sec:ch3_environmental_impact}
+The environmental impact is twofold. Directly, by preventing malicious manipulation of industrial processes—such as the intentional release of untreated wastewater from a water treatment facility or toxic chemicals from a compromised factory—this research helps avert potential environmental disasters. Indirectly, while the use of GPU-accelerated computing for model training is energy-intensive, it is a one-time research cost. The resulting highly efficient IDS models can operate for years with a much lower energy footprint, contributing to the long-term sustainability and safety of industrial operations by preventing catastrophic failures.
+
+\section{Ethical Issues}
+\label{sec:ch3_ethical_issues}
+The primary ethical consideration in this field is the "dual-use" nature of the research. While our goal is to build defensive systems, the techniques used to understand system vulnerabilities could theoretically be exploited by malicious actors. We mitigate this by focusing solely on detection methodologies and not publishing any specific exploit details. Furthermore, all datasets used in this research are publicly available and anonymized, ensuring no private or sensitive operational data is compromised. We also acknowledge the potential for algorithmic bias; if a training dataset is not representative of all possible operational states, the resulting model could be biased in its detections, a known challenge in the field.
+
+\section{Standards - if applicable}
+\label{sec:ch3_standards}
+While there are no formal standards that this research project must adhere to, the methodologies employed are aligned with best practices in the machine learning and cybersecurity communities. The approach is informed by guidelines from the NIST Cybersecurity Framework, particularly concerning the "Detect" function. Furthermore, the selection of performance metrics (F1-Score, Precision, Recall) is the de facto standard for evaluating classifiers on the kind of imbalanced data common in intrusion detection, ensuring our results are comparable and credible within the broader research community.
+
+\section{Project Management Plan}
+\label{sec:ch3_project_management}
+This project was executed in four distinct phases, adhering to a structured research timeline:
+\begin{itemize}
+    \item \textbf{Phase 1: Literature Review \& Setup (Completed):} A thorough review of existing literature on ML-based IDS was conducted to identify research gaps. The computational environment, including Python, PyTorch, and the RAPIDS suite, was configured.
+    \item \textbf{Phase 2: Data Preprocessing \& Baseline Modeling (Completed):} A robust data processing pipeline was implemented using Pandas to handle the HAI dataset. Baseline and advanced ensemble models were benchmarked to establish initial performance metrics.
+    \item \textbf{Phase 3: Deep Learning \& Cross-Dataset Analysis (In Progress):} RNN models (LSTM, GRU) were implemented in PyTorch and evaluated. Top-performing models are currently being benchmarked on the SWaT and WADI datasets for cross-validation.
+    \item \textbf{Phase 4: Advanced Model Development \& Final Reporting (Future Work):} Based on the findings, a novel hybrid model will be developed. The final research paper and report will be drafted with all findings.
+\end{itemize}
+
+\section{Risk Management}
+\label{sec:ch3_risk_management}
+Key risks and mitigations were identified and managed throughout the project:
+\begin{itemize}
+    \item \textbf{Risk: Computational Limitations.} Handling large time-series datasets can lead to memory errors or prohibitive training times. \textbf{Mitigation:} This was mitigated by using the GPU-accelerated NVIDIA RAPIDS libraries (cuDF, cuML), which are specifically designed for large-scale data science workflows.
+    \item \textbf{Risk: Inability to Replicate SOTA Results.} State-of-the-art results can be difficult to reproduce due to subtle differences in implementation or preprocessing. \textbf{Mitigation:} We started with a broad benchmark of eight different models to identify the most promising class of algorithms (ensembles) before dedicating significant time to fine-tuning, ensuring our efforts were focused effectively.
+    \item \textbf{Risk: Biased Evaluation due to Imbalanced Data.} Standard accuracy is a misleading metric on imbalanced datasets. \textbf{Mitigation:} We used stratified data splitting to maintain class proportions and focused on appropriate metrics like F1-score and recall for the minority (attack) class.
+\end{itemize}
+
+\section{Economic Analysis}
+\label{sec:ch3_economic_analysis}
+The economic justification for developing an advanced IDS is a classic cost-benefit analysis. The cost of this research includes computational resources for training and development time. The benefit is the avoidance of the catastrophic costs associated with a successful cyber-attack on an ICS, which can include not only direct financial loss from production downtime and equipment repair but also regulatory fines and immense reputational damage. Given that the potential cost of a single major incident in critical infrastructure can run into the hundreds of millions of dollars, the investment in a high-performing, low-false-positive IDS represents a significant and justifiable return on investment for any industrial operator.
